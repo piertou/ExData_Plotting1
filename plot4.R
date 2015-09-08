@@ -12,7 +12,7 @@ with(epc, plot(x = dateTime, y = Global_active_power, type = "l", col = "black",
                main = "", ylab = "Global Active Power (kilowatts)", xlab = ""))
 
 with(epc, plot(x = dateTime, y = Voltage, type = "l", col = "black",
-               main = "", ylab = "Voltage", xlab = ""))
+               main = "", ylab = "Voltage", xlab = "datetime"))
 
 plot(x = epc$dateTime, y = epc$Sub_metering_1, type = "l", col = "black",
      main = "", ylab = "Energy sub metering", xlab = "")
@@ -22,7 +22,7 @@ legend(x = "topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_meter
                  col = c("black", "red", "blue"), lty = c(1, 1, 1), bty = "n")
 
 with(epc, plot(x = dateTime, y = Global_reactive_power, type = "l", col = "black",
-               main = "", ylab = "Global_reactive_power", xlab = ""))
+               main = "", ylab = "Global_reactive_power", xlab = "datetime"))
 
 par(def.par)  # restore default
 dev.off()

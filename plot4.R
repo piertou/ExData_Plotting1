@@ -1,13 +1,12 @@
 require(readr)
-epcNames <- c("Date","Time","Global_active_power", "Global_reactive_power", "Voltage", "Global_intensity",
-              "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
+epcNames <- names(read_delim("household_power_consumption.txt", delim = ";", col_names = TRUE, n_max = 0))
 epc <- read_delim("household_power_consumption.txt", delim = ";", na = "?", 
                 col_names = epcNames, skip = 66637, n_max = 2880)
 epc$dateTime <- strptime(paste(epc$Date, epc$Time), "%d/%m/%Y %H:%M:%S")
 
 png(filename = "plot4.png")
 def.par <- par(no.readonly = TRUE) # save default, for resetting...
-par(mfrow=c(2,2))
+par(mfrow=c(2,2))  # 2 columns, 2 rows, by row
 
 with(epc, plot(x = dateTime, y = Global_active_power, type = "l", col = "black",
                main = "", ylab = "Global Active Power (kilowatts)", xlab = ""))
@@ -25,5 +24,5 @@ legend(x = "topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_meter
 with(epc, plot(x = dateTime, y = Global_reactive_power, type = "l", col = "black",
                main = "", ylab = "Global_reactive_power", xlab = ""))
 
-par(def.par)  #- reset to default
+par(def.par)  # restore default
 dev.off()

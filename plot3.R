@@ -1,6 +1,5 @@
 require(readr)
-epcNames <- c("Date","Time","Global_active_power", "Global_reactive_power", "Voltage", "Global_intensity",
-              "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
+epcNames <- names(read_delim("household_power_consumption.txt", delim = ";", col_names = TRUE, n_max = 0))
 epc <- read_delim("household_power_consumption.txt", delim = ";", na = "?", 
                 col_names = epcNames, skip = 66637, n_max = 2880)
 epc$dateTime <- strptime(paste(epc$Date, epc$Time), "%d/%m/%Y %H:%M:%S")
